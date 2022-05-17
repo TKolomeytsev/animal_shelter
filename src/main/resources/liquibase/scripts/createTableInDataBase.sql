@@ -7,3 +7,8 @@ CREATE TABLE data_messages
     , chat_id bigint NOT NULL
     , date_send timestamp without time zone
 );
+
+CREATE TABLE nsi_commands(
+    id character varying(255) PRIMARY KEY
+    , command character varying(255)
+)

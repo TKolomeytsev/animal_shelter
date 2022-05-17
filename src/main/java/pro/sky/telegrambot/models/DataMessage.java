@@ -1,14 +1,18 @@
-package pro.sky.telegrambot.model;
+package pro.sky.telegrambot.models;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "data_messages")
-public class DataMessages {
+public class DataMessage extends AbstractModel {
 
     @Id
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "id", unique = true)
     private String id;
 
     @Column(name = "chat_id")
@@ -20,7 +24,7 @@ public class DataMessages {
     @Column(name = "date_send")
     private LocalDateTime dateSend;
 
-    public DataMessages() {}
+    public DataMessage() {}
 
     public String getId() {
         return id;

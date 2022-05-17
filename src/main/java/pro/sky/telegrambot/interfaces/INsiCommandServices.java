@@ -1,0 +1,15 @@
+package pro.sky.telegrambot.interfaces;
+
+import pro.sky.telegrambot.models.NsiCommands;
+
+import java.util.List;
+
+public interface INsiCommandServices {
+    List<NsiCommands> getAllCommands();
+
+    NsiCommands getCommandsById(String id);
+
+    List<NsiCommands> getCommandByCommand(String command);
+
+    NsiCommands save(NsiCommands command);
+}
