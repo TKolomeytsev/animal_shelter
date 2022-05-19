@@ -12,4 +12,8 @@ public interface INsiCommandServices {
     List<NsiCommands> getCommandByCommand(String command);
 
     NsiCommands save(NsiCommands command);
+
+    NsiCommands update(NsiCommands command);
+
+    NsiCommands delete(String id);
 }

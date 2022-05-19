@@ -1,13 +1,14 @@
 package pro.sky.telegrambot.models;
 
 import org.hibernate.annotations.GenericGenerator;
+import pro.sky.telegrambot.interfaces.Utils4AnimalShelter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "data_messages")
-public class DataMessage extends AbstractModel {
+public class DataMessage {
 
     @Id
     @GeneratedValue(generator="system-uuid")
@@ -67,4 +68,5 @@ public class DataMessage extends AbstractModel {
                 ", dateSend:" + dateSend +
                 '}';
     }
+
 }

@@ -47,6 +47,7 @@ public class DataMessagesService implements IDataMessagesServices {
         return saveMessage;
     }
 
+    // Метод возвращает последнее сообщение чата
     @Override
     public String getLastCommand(long chatId) {
         List<DataMessage> dataMessageList = dataMessagesRepository.findByChatIdOrderByDateSendDesc(chatId);

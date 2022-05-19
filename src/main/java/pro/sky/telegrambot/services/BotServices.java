@@ -3,10 +3,8 @@ package pro.sky.telegrambot.services;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import liquibase.pro.packaged.E;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.interfaces.IBotServices;
-import pro.sky.telegrambot.models.AbstractModel;
 import pro.sky.telegrambot.models.DataMessage;
 import pro.sky.telegrambot.models.NsiCommands;
 
@@ -33,12 +31,13 @@ public class BotServices implements IBotServices {
     @Override
     public DataMessage readMessage(Update update) {
         DataMessage dataMessage = new DataMessage();
-        dataMessage.setMessage(update.message().text());
+        dataMessage.setMessage(update.message().text().trim());
         dataMessage.setChatId(update.message().chat().id());
         dataMessage.setDateSend(getCurDate());
         return dataMessage;
     }
 
+    // Метод перенаправления
     @Override
     public void router(Update update) {
         DataMessage dataMessage = readMessage(update);
@@ -69,11 +68,13 @@ public class BotServices implements IBotServices {
         }
     }
 
+    // Метод отправки сообщения
     private void send(long chatId, String returnResponse) {
         SendMessage sendMessage = new SendMessage(chatId,returnResponse);
         telegramBot.execute(sendMessage);
     }
 
+    // Метод возврата ответа
     private String returnResponse(List<NsiCommands> allCommands) {
         StringBuilder returnString = new StringBuilder();
         for(NsiCommands command : allCommands){
@@ -82,6 +83,7 @@ public class BotServices implements IBotServices {
         return returnString.toString();
     }
 
+    // Метод возврата текущего времени в нужном формате
     private LocalDateTime getCurDate(){
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");

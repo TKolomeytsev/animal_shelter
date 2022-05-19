@@ -1,0 +1,8 @@
+pro.sky.telegrambot
+pro.sky.telegrambot.configuration
+pro.sky.telegrambot.interfaces
+pro.sky.telegrambot.listener
+pro.sky.telegrambot.models
+pro.sky.telegrambot.repositories
+pro.sky.telegrambot.RestControllers
+pro.sky.telegrambot.services

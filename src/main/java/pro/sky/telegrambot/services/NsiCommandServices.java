@@ -23,7 +23,7 @@ public class NsiCommandServices implements INsiCommandServices {
 
     @Override
     public NsiCommands getCommandsById(String id) {
-        return nsiCommandsRepository.getById(id);
+        return nsiCommandsRepository.findById(id).get();
     }
 
     public List<NsiCommands> getCommandByCommand(String command) {
@@ -33,6 +33,21 @@ public class NsiCommandServices implements INsiCommandServices {
     @Override
     public NsiCommands save(NsiCommands command) {
         return nsiCommandsRepository.save(command);
+    }
+
+    @Override
+    public NsiCommands update(NsiCommands command) {
+        return save(command);
+    }
+
+    @Override
+    public NsiCommands delete(String id) {
+        NsiCommands command  = getCommandsById(id);
+        if(command!=null){
+            nsiCommandsRepository.deleteById(id);
+            return command;
+        }
+        return null;
     }
 
 

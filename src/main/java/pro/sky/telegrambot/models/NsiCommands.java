@@ -1,20 +1,23 @@
 package pro.sky.telegrambot.models;
 
 import org.hibernate.annotations.GenericGenerator;
+import pro.sky.telegrambot.interfaces.Utils4AnimalShelter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "nsi_commands")
-public class NsiCommands extends AbstractModel {
+// Справочник команд
+public class NsiCommands implements Utils4AnimalShelter {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name = "id", unique = true)
+    //идентификатор команды, тип данных строка (String), содержит уникальные заначения вида uuid
     private String id;
 
     @Column(name = "command")
-
+    //название команды, тип данных строка (String)
     private String command;
 
     public NsiCommands() {}
