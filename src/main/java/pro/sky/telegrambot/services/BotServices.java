@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+//Сервиса бота
 @Service
 public class BotServices implements IBotServices {
     private final NsiCommandServices commandServices;

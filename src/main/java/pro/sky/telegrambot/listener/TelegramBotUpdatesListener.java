@@ -12,6 +12,7 @@ import pro.sky.telegrambot.services.BotServices;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
+
 @Service
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
@@ -30,6 +31,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         telegramBot.setUpdatesListener(this);
     }
 
+    //Слушатель
     @Override
     public int process(List<Update> updates) {
         updates.forEach(update -> {

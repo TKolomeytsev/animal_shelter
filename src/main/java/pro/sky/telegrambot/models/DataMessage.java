@@ -1,11 +1,10 @@
 package pro.sky.telegrambot.models;
 
 import org.hibernate.annotations.GenericGenerator;
-import pro.sky.telegrambot.interfaces.Utils4AnimalShelter;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+//Хранилище сообщений
 @Entity
 @Table(name = "data_messages")
 public class DataMessage {

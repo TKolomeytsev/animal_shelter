@@ -1,10 +1,10 @@
 package pro.sky.telegrambot.interfaces;
 
 import pro.sky.telegrambot.models.DataMessage;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
+//Интерсейс сервиса для работы с хранилищем сообщей
 public interface IDataMessagesServices {
     List<DataMessage> getAllMessages();
 

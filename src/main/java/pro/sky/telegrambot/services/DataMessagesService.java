@@ -7,6 +7,8 @@ import pro.sky.telegrambot.repositories.IDataMessagesRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+//Сервис сообщений
 @Service
 public class DataMessagesService implements IDataMessagesServices {
     private final String SYMBOL_COMMAND = "/";
