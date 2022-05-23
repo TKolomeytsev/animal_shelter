@@ -20,6 +20,16 @@ public class NsiCommands implements Utils4AnimalShelter {
     //название команды, тип данных строка (String)
     private String command;
 
+    @Column(name = "level")
+    private int level;
+
+    @Column(name = "description")
+    private int description;
+
+
+
+
+
     public NsiCommands() {}
 
     @Override
@@ -49,5 +59,21 @@ public class NsiCommands implements Utils4AnimalShelter {
     @Override
     public String responseAsString() {
         return command + "\n";
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getDescription() {
+        return description;
+    }
+
+    public void setDescription(int description) {
+        this.description = description;
     }
 }
