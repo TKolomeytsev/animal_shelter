@@ -4,6 +4,11 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * @author AKolomeytsev<br/>
+ * Модель <b>DataMessage</b> - описывает хранилище сообщений.<br/>
+ * Таблица <b>data_messages</b> базы данных <b>AnimalShelterDB</b>.
+ */
 @Entity
 @Table(name = "data_messages")
 public class DataMessage {

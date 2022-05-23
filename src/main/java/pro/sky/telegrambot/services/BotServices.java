@@ -14,6 +14,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Класс имплементирован от интерфейса {@link IBotServices}
+ */
 @Service
 public class BotServices implements IBotServices {
     private final NsiCommandServices commandServices;
@@ -28,6 +31,11 @@ public class BotServices implements IBotServices {
         this.telegramBot = telegramBot;
     }
 
+    /**
+     * Реализует метод интерфейса {@link IBotServices}
+     * @param update
+     * @return {@link DataMessage}
+     */
     @Override
     public DataMessage readMessage(Update update) {
         DataMessage dataMessage = new DataMessage();
@@ -37,7 +45,11 @@ public class BotServices implements IBotServices {
         return dataMessage;
     }
 
-    // Метод перенаправления
+    /**
+     * Реализует метод интерфейса {@link IBotServices}
+     * @param update
+     * @return ничего не возвращает
+     */
     @Override
     public void router(Update update) {
         DataMessage dataMessage = readMessage(update);
@@ -68,13 +80,16 @@ public class BotServices implements IBotServices {
         }
     }
 
-    // Метод отправки сообщения
+    /**
+     * Метод отправки сообщения
+     * @param chatId идентификатор чата
+     * @param returnResponse текстовая иформация
+     */
     private void send(long chatId, String returnResponse) {
         SendMessage sendMessage = new SendMessage(chatId,returnResponse);
         telegramBot.execute(sendMessage);
     }
 
-    // Метод возврата ответа
     private String returnResponse(List<NsiCommands> allCommands) {
         StringBuilder returnString = new StringBuilder();
         for(NsiCommands command : allCommands){
@@ -83,7 +98,6 @@ public class BotServices implements IBotServices {
         return returnString.toString();
     }
 
-    // Метод возврата текущего времени в нужном формате
     private LocalDateTime getCurDate(){
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");

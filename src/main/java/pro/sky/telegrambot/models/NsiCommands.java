@@ -5,9 +5,13 @@ import pro.sky.telegrambot.interfaces.Utils4AnimalShelter;
 
 import javax.persistence.*;
 
+/**
+ * @author AKolomeytsev<br/>
+ * Модель <b>NsiCommands</b> - описывает справочник команд.<br/>
+ * Таблица <b>nsi_commands</b> базы данных <b>AnimalShelterDB</b>.
+ */
 @Entity
 @Table(name = "nsi_commands")
-// Справочник команд
 public class NsiCommands implements Utils4AnimalShelter {
     @Id
     @GeneratedValue(generator="system-uuid")
