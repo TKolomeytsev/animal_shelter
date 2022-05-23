@@ -3,7 +3,6 @@ package pro.sky.telegrambot.interfaces;
 import pro.sky.telegrambot.models.NsiCommands;
 import java.util.List;
 
-//Итнерфейс сервиса для работы с хранилищем команд
 public interface INsiCommandServices {
     List<NsiCommands> getAllCommands();
 

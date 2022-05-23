@@ -4,7 +4,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-//Хранилище сообщений
 @Entity
 @Table(name = "data_messages")
 public class DataMessage {

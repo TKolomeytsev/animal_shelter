@@ -4,7 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import pro.sky.telegrambot.interfaces.Utils4AnimalShelter;
 
 import javax.persistence.*;
-//Хранилище команд
+
 @Entity
 @Table(name = "nsi_commands")
 // Справочник команд

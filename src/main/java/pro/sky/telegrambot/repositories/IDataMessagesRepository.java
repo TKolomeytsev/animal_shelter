@@ -8,7 +8,7 @@ import pro.sky.telegrambot.models.DataMessage;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//Репозиторий сообщений
+
 public interface IDataMessagesRepository extends JpaRepository<DataMessage,String> {
     List<DataMessage> findAllByChatId(long chatId);
 

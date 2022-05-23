@@ -7,7 +7,6 @@ import pro.sky.telegrambot.services.NsiCommandServices;
 
 import java.util.List;
 
-//Контроллер REST
 @RestController
 @RequestMapping("nsiCommands")
 public class NsiCommandsController {

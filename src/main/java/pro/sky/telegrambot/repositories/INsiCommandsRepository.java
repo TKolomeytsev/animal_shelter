@@ -6,7 +6,6 @@ import pro.sky.telegrambot.models.NsiCommands;
 import java.util.List;
 import java.util.Optional;
 
-//Репозиторий команд
 public interface INsiCommandsRepository extends JpaRepository<NsiCommands,String> {
     List<NsiCommands> findByCommand(String command);
 

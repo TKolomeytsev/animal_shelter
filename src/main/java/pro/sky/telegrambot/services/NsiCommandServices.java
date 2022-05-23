@@ -7,7 +7,7 @@ import pro.sky.telegrambot.repositories.INsiCommandsRepository;
 
 import java.util.List;
 
-//Серевис команд
+
 @Service
 public class NsiCommandServices implements INsiCommandServices {
 
