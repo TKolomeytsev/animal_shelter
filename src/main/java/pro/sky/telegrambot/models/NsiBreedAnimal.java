@@ -18,7 +18,7 @@ public class NsiBreedAnimal {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid",strategy = "uuid")
     @Column(name = "id")
-    private String id;
+    private String idBreed;
 
     @OneToMany(mappedBy = "nsiBreedAnimal")
     private Collection<DataAnimal> dataAnimals;
@@ -29,11 +29,11 @@ public class NsiBreedAnimal {
     private String name;
 
     public String getId() {
-        return id;
+        return idBreed;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idBreed = id;
     }
 
     public String getName() {
@@ -49,18 +49,18 @@ public class NsiBreedAnimal {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NsiBreedAnimal that = (NsiBreedAnimal) o;
-        return id.equals(that.id) && name.equals(that.name);
+        return idBreed.equals(that.idBreed) && name.equals(that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(idBreed, name);
     }
 
     @Override
     public String toString() {
         return "NsiBreedAnimal{" +
-                "id='" + id + '\'' +
+                "id='" + idBreed + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }

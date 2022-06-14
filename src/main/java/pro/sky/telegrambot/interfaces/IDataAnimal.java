@@ -5,7 +5,7 @@ import pro.sky.telegrambot.models.DataAnimal;
 import java.util.List;
 
 public interface IDataAnimal {
-    List<DataAnimal> getAllAnimalPhoto();
+    List<DataAnimal> getAllAnimal();
 
     DataAnimal getAllDataAnimalById(String id);
 

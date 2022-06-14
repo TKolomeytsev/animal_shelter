@@ -18,17 +18,17 @@ public class DataAnimal {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid",strategy = "uuid")
     @Column(name = "id")
-    private String id;
+    private String ididAnimal;
 
     @OneToMany(mappedBy = "dataAnimal")
     private Collection<DataAnimalPhoto> dataAnimalPhotos;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "idKind")
     private NsiAnimalKind nsiAnimalKind;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "idBreed")
     private NsiBreedAnimal nsiBreedAnimal;
 
     @Column(name = "nickname")
@@ -54,20 +54,20 @@ public class DataAnimal {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DataAnimal that = (DataAnimal) o;
-        return age == that.age && weight == that.weight && Double.compare(that.growth, growth) == 0 && id.equals(that.id) && dataAnimalPhotos.equals(that.dataAnimalPhotos) && nsiAnimalKind.equals(that.nsiAnimalKind) && nsiBreedAnimal.equals(that.nsiBreedAnimal) && nickname.equals(that.nickname) && color.equals(that.color);
+        return age == that.age && weight == that.weight && Double.compare(that.growth, growth) == 0 && ididAnimal.equals(that.ididAnimal) && dataAnimalPhotos.equals(that.dataAnimalPhotos) && nsiAnimalKind.equals(that.nsiAnimalKind) && nsiBreedAnimal.equals(that.nsiBreedAnimal) && nickname.equals(that.nickname) && color.equals(that.color);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dataAnimalPhotos, nsiAnimalKind, nsiBreedAnimal, nickname, age, weight, growth, color);
+        return Objects.hash(ididAnimal, dataAnimalPhotos, nsiAnimalKind, nsiBreedAnimal, nickname, age, weight, growth, color);
     }
 
     public String getId() {
-        return id;
+        return ididAnimal;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.ididAnimal = id;
     }
 
     public Collection<DataAnimalPhoto> getDataAnimalPhotos() {
@@ -137,7 +137,7 @@ public class DataAnimal {
     @Override
     public String toString() {
         return "DataAnimal{" +
-                "id='" + id + '\'' +
+                "id='" + ididAnimal + '\'' +
                 ", dataAnimalPhotos=" + dataAnimalPhotos +
                 ", nsiAnimalKind=" + nsiAnimalKind +
                 ", nsiBreedAnimal=" + nsiBreedAnimal +

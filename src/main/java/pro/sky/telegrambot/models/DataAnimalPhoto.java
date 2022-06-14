@@ -11,11 +11,11 @@ public class DataAnimalPhoto {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid",strategy = "uuid")
     @Column(name = "id")
-    private String id;
+    private String idPhoto;
 
     //@Column(name = "id_animal")
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "idAnimal")
     private DataAnimal dataAnimal;
 
     @Column(name = "description")
@@ -25,11 +25,11 @@ public class DataAnimalPhoto {
     }
 
     public String getId() {
-        return id;
+        return idPhoto;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.idPhoto = id;
     }
 
     public DataAnimal getDataAnimal() {
