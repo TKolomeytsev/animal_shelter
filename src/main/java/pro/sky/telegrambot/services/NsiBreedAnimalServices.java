@@ -4,9 +4,11 @@ import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.exception.ExceptionNotFoundBreedAnimal;
 import pro.sky.telegrambot.exception.ExceptionServerError;
 import pro.sky.telegrambot.interfaces.INsiBreedAnimal;
+import pro.sky.telegrambot.models.NsiAnimalKind;
 import pro.sky.telegrambot.models.NsiBreedAnimal;
 import pro.sky.telegrambot.repositories.INsiBreedAnimalRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -79,5 +81,13 @@ public class NsiBreedAnimalServices implements INsiBreedAnimal {
         }else{
             throw new ExceptionNotFoundBreedAnimal();
         }
+    }
+
+    public List<String> getCommands(List<NsiBreedAnimal> eList) {
+        List<String> list = new ArrayList<>();
+        for(NsiBreedAnimal item : eList){
+            list.add("/" + item.getName());
+        }
+        return list;
     }
 }

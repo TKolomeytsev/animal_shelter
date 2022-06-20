@@ -10,6 +10,8 @@ public interface INsiCommandServices {
 
     List<NsiCommands> getCommandByCommand(String command);
 
+    List<NsiCommands> findByLevel(int level);
+
     NsiCommands save(NsiCommands command);
 
     NsiCommands update(NsiCommands command);

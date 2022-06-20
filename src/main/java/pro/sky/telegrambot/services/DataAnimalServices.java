@@ -6,8 +6,10 @@ import pro.sky.telegrambot.exception.ExceptionNotFoundDataAnimal;
 import pro.sky.telegrambot.exception.ExceptionServerError;
 import pro.sky.telegrambot.interfaces.IDataAnimal;
 import pro.sky.telegrambot.models.DataAnimal;
+import pro.sky.telegrambot.models.NsiCommands;
 import pro.sky.telegrambot.repositories.IDataAnimalRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -119,5 +121,28 @@ public class DataAnimalServices implements IDataAnimal {
         }else{
             throw new ExceptionNotFoundAnimalKind();
         }
+    }
+
+    public List<String> getCommands(List<DataAnimal> eList) {
+        List<String> list = new ArrayList<>();
+        for(DataAnimal item : eList){
+            list.add("----------------"+"\n");
+            list.add("/" + item.getId()+"\n");
+            list.add(item.getNickname()+"\n");
+            list.add("----------------"+"\n");
+        }
+        return list;
+    }
+
+    public List<String> getAnimalInfo(DataAnimal eList) {
+        List<String> list = new ArrayList<>();
+        list.add("----------------" + "\n");
+        list.add("Кличка: " + eList.getNickname()+"\n");
+        list.add("Возраст: " + eList.getAge()+"\n");
+        list.add("Рост: " + eList.getGrowth()+"\n");
+        list.add("Вес: " + eList.getWeight()+"\n");
+        list.add("Цет: " + eList.getColor()+"\n");
+        list.add("----------------"+"\n");
+        return list;
     }
 }

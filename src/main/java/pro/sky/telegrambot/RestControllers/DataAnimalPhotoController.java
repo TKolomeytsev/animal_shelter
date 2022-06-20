@@ -3,14 +3,17 @@ package pro.sky.telegrambot.RestControllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pro.sky.telegrambot.models.DataAnimalPhotoInputOutput;
+import pro.sky.telegrambot.models.DataAnimalPhoto;
 import pro.sky.telegrambot.services.DataAnimalPhotoService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -36,8 +39,8 @@ public class DataAnimalPhotoController {
             ,tags = "AnimalPhoto"
     )
     @GetMapping(path = "/getAnimalPhotosByIdAnimal/{id}")
-    public ResponseEntity<List<DataAnimalPhotoInputOutput>> getAllAnimalPhotoByIdAnimal(@PathVariable String idAnimal){
-        List<DataAnimalPhotoInputOutput> data = dataAnimalPhotoService.getAllAnimalPhotoByIdAnimal(idAnimal);
+    public ResponseEntity<List<DataAnimalPhoto>> getAllAnimalPhotoByIdAnimal(@PathVariable String idAnimal){
+        List<DataAnimalPhoto> data = dataAnimalPhotoService.getAllAnimalPhotoByIdAnimal(idAnimal);
         return ResponseEntity.ok(data);
     }
 
@@ -55,9 +58,16 @@ public class DataAnimalPhotoController {
             ,tags = "AnimalPhoto"
     )
     @GetMapping
-    public ResponseEntity<List<DataAnimalPhotoInputOutput>> getAllAnimalPhotos(){
-        List<DataAnimalPhotoInputOutput> data = dataAnimalPhotoService.getAllAnimalPhoto();
-        return ResponseEntity.ok(data);
+    public List<ResponseEntity<byte[]>> getAllAnimalPhotos(){
+        List<DataAnimalPhoto> data = dataAnimalPhotoService.getAllAnimalPhoto();
+        List<ResponseEntity<byte[]>> entityList = new ArrayList<>();
+        for(DataAnimalPhoto item : data) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.parseMediaType(item.getMediaType()));
+            headers.setContentLength(item.getContent().length);
+            entityList.add(ResponseEntity.status(HttpStatus.OK).headers(headers).body(item.getContent()));
+        }
+        return entityList;
     }
 
     @Operation(
@@ -73,9 +83,9 @@ public class DataAnimalPhotoController {
     }
             ,tags = "AnimalPhoto"
     )
-    @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<DataAnimalPhotoInputOutput> add(@RequestBody DataAnimalPhotoInputOutput dataAnimalPhoto, @RequestParam MultipartFile avatar) throws IOException {
-        dataAnimalPhotoService.save(dataAnimalPhoto,avatar);
+    @PostMapping(value = "{idAnimal}/{description}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<DataAnimalPhoto> add(@PathVariable String idAnimal, @PathVariable String description, @RequestParam MultipartFile avatar) throws IOException {
+        dataAnimalPhotoService.save(idAnimal,description,avatar);
         return ResponseEntity.ok().build();
     }
 
@@ -93,8 +103,8 @@ public class DataAnimalPhotoController {
             ,tags = "AnimalPhoto"
     )
     @PutMapping(value = "/edit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<DataAnimalPhotoInputOutput> edit(@RequestBody DataAnimalPhotoInputOutput dataAnimalPhoto, @RequestParam MultipartFile avatar) throws IOException {
-        dataAnimalPhotoService.update(dataAnimalPhoto,avatar);
+    public ResponseEntity<DataAnimalPhoto> edit(@PathVariable String id, @PathVariable String idAnimal, @PathVariable String description, @RequestParam MultipartFile avatar) throws IOException {
+        dataAnimalPhotoService.update(id,idAnimal,description,avatar);
         return ResponseEntity.ok().build();
     }
 
@@ -112,8 +122,8 @@ public class DataAnimalPhotoController {
             ,tags = "AnimalPhoto"
     )
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<DataAnimalPhotoInputOutput> delete(@PathVariable String id){
-        DataAnimalPhotoInputOutput data = dataAnimalPhotoService.delete(id);
+    public ResponseEntity<DataAnimalPhoto> delete(@PathVariable String id){
+        DataAnimalPhoto data = dataAnimalPhotoService.delete(id);
         return ResponseEntity.ok(data);
     }
 
@@ -131,8 +141,8 @@ public class DataAnimalPhotoController {
             ,tags = "AnimalPhoto"
     )
     @DeleteMapping(path = "/deleteByAnimalId/{idAnimal}")
-    public ResponseEntity<List<DataAnimalPhotoInputOutput>> deleteByAnimalId(@PathVariable String idAnimal){
-        List<DataAnimalPhotoInputOutput> data = dataAnimalPhotoService.deleteByDataAnimal(idAnimal);
+    public ResponseEntity<List<DataAnimalPhoto>> deleteByAnimalId(@PathVariable String idAnimal){
+        List<DataAnimalPhoto> data = dataAnimalPhotoService.deleteByDataAnimal(idAnimal);
         return ResponseEntity.ok(data);
     }
 }

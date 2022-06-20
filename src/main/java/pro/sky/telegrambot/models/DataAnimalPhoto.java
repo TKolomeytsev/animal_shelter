@@ -21,6 +21,9 @@ public class DataAnimalPhoto {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "media_type")
+    private String mediaType;
+
     public DataAnimalPhoto() {
     }
 
@@ -60,4 +63,11 @@ public class DataAnimalPhoto {
     @Column(name = "content")
     private byte[] content;
 
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
 }

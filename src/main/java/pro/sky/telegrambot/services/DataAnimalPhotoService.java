@@ -9,77 +9,69 @@ import pro.sky.telegrambot.interfaces.IDataAnimalPhoto;
 import pro.sky.telegrambot.models.DataAnimalPhoto;
 import pro.sky.telegrambot.models.DataAnimalPhotoInputOutput;
 import pro.sky.telegrambot.repositories.IDataAnimalPhotoRepository;
+import pro.sky.telegrambot.repositories.IDataAnimalRepository;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class DataAnimalPhotoService implements IDataAnimalPhoto {
     private final IDataAnimalPhotoRepository dataAnimalPhotoRepository;
+    private final IDataAnimalRepository dataAnimalRepository;
 
 
-    public DataAnimalPhotoService(IDataAnimalPhotoRepository dataAnimalPhotoRepository) {
+    public DataAnimalPhotoService(IDataAnimalPhotoRepository dataAnimalPhotoRepository, IDataAnimalRepository dataAnimalRepository) {
         this.dataAnimalPhotoRepository = dataAnimalPhotoRepository;
+        this.dataAnimalRepository = dataAnimalRepository;
     }
 
     @Override
-    public List<DataAnimalPhotoInputOutput> getAllAnimalPhoto() {
+    public List<DataAnimalPhoto> getAllAnimalPhoto() {
         List<DataAnimalPhoto> dataAnimalPhotos = dataAnimalPhotoRepository.findAll();
         if(dataAnimalPhotos!=null){
-            List<DataAnimalPhotoInputOutput> dataAnimalPhotoInputOutputs = new ArrayList<DataAnimalPhotoInputOutput>();
-            for(DataAnimalPhoto dataAnimalPhoto : dataAnimalPhotos){
-                DataAnimalPhotoInputOutput dataAnimalPhotoInputOutput = new DataAnimalPhotoInputOutput();
-                dataAnimalPhotoInputOutput.setIdPhoto(dataAnimalPhoto.getId());
-                dataAnimalPhotoInputOutput.setDescription(dataAnimalPhoto.getDescription());
-                dataAnimalPhotoInputOutput.setContent(dataAnimalPhoto.getContent());
-                dataAnimalPhotoInputOutputs.add(dataAnimalPhotoInputOutput);
-            }
-            return dataAnimalPhotoInputOutputs;
+            return dataAnimalPhotos;
         }else {
             throw new ExceptionNotFoundAnimalKind();
         }
     }
 
     @Override
-    public List<DataAnimalPhotoInputOutput> getAllAnimalPhotoByIdAnimal(String idAnimal) {
+    public List<DataAnimalPhoto> getAllAnimalPhotoByIdAnimal(String idAnimal) {
         List<DataAnimalPhoto> dataAnimalPhotos = dataAnimalPhotoRepository.findByDataAnimal(idAnimal);
-        if(dataAnimalPhotos!=null){
-            List<DataAnimalPhotoInputOutput> dataAnimalPhotoInputOutputs = new ArrayList<DataAnimalPhotoInputOutput>();
-            for(DataAnimalPhoto dataAnimalPhoto : dataAnimalPhotos){
-                DataAnimalPhotoInputOutput dataAnimalPhotoInputOutput = new DataAnimalPhotoInputOutput();
-                dataAnimalPhotoInputOutput.setIdPhoto(dataAnimalPhoto.getId());
-                dataAnimalPhotoInputOutput.setDescription(dataAnimalPhoto.getDescription());
-                dataAnimalPhotoInputOutput.setContent(dataAnimalPhoto.getContent());
-                dataAnimalPhotoInputOutputs.add(dataAnimalPhotoInputOutput);
-            }
-            return dataAnimalPhotoInputOutputs;
+        if(dataAnimalPhotos.size()>0){
+            return dataAnimalPhotos;
         }else {
             throw new ExceptionNotFoundAnimalPhoto();
         }
     }
 
     @Override
-    public DataAnimalPhotoInputOutput getAllAnimalPhotoById(String id) {
+    public List<byte[]> getPhotoByIdAnimal(String idAnimal) {
+        List<byte[]> photos = dataAnimalPhotoRepository.getPhotoByIdAnimal(idAnimal);
+        if(photos.size()>0){
+            return photos;
+        }else {
+            throw new ExceptionNotFoundAnimalPhoto();
+        }
+    }
+
+
+    @Override
+    public DataAnimalPhoto getAllAnimalPhotoById(String id) {
         DataAnimalPhoto dataAnimalPhoto = dataAnimalPhotoRepository.findById(id).get();
         if(dataAnimalPhoto!=null){
-            DataAnimalPhotoInputOutput dataAnimalPhotoInputOutput = new DataAnimalPhotoInputOutput();
-            dataAnimalPhotoInputOutput.setIdPhoto(dataAnimalPhoto.getId());
-            dataAnimalPhotoInputOutput.setDescription(dataAnimalPhoto.getDescription());
-            dataAnimalPhotoInputOutput.setContent(dataAnimalPhoto.getContent());
-            return dataAnimalPhotoInputOutput;
+            return dataAnimalPhoto;
         }else {
             throw new ExceptionNotFoundAnimalPhoto();
         }
     }
 
     @Override
-    public DataAnimalPhotoInputOutput save(DataAnimalPhotoInputOutput dataAnimalPhotoInputOutput, MultipartFile avatarFile) throws IOException {
+    public DataAnimalPhoto save(String idAnimal,String description, MultipartFile avatarFile) throws IOException {
         try{
-            DataAnimalPhotoInputOutput dataAnimalPhoto = uploadPhoto(dataAnimalPhotoInputOutput,avatarFile);
-            String id = UUID.randomUUID().toString();
-            dataAnimalPhotoRepository.save(id,dataAnimalPhoto.getIdAnimal(),dataAnimalPhoto.getDescription(),dataAnimalPhoto.getContent());
+            DataAnimalPhoto dataAnimalPhoto = uploadPhoto(null,idAnimal,description,avatarFile);
+            dataAnimalPhoto = dataAnimalPhotoRepository.save(dataAnimalPhoto);
             return dataAnimalPhoto;
         }catch (ExceptionServerError | IOException writeException){
             throw writeException ;
@@ -87,11 +79,10 @@ public class DataAnimalPhotoService implements IDataAnimalPhoto {
     }
 
     @Override
-    public DataAnimalPhotoInputOutput update(DataAnimalPhotoInputOutput dataAnimalPhotoInputOutput, MultipartFile avatarFile) throws IOException {
+    public DataAnimalPhoto update(String id, String idAnimal, String description, MultipartFile avatarFile) throws IOException {
         try{
-            DataAnimalPhotoInputOutput dataAnimalPhoto = uploadPhoto(dataAnimalPhotoInputOutput,avatarFile);
-            String id = UUID.randomUUID().toString();
-            dataAnimalPhotoRepository.save(id,dataAnimalPhoto.getIdAnimal(),dataAnimalPhoto.getDescription(),dataAnimalPhoto.getContent());
+            DataAnimalPhoto dataAnimalPhoto = uploadPhoto(id, idAnimal, description, avatarFile);
+            dataAnimalPhoto = dataAnimalPhotoRepository.save(dataAnimalPhoto);
             return dataAnimalPhoto;
         }catch (ExceptionServerError | IOException writeException){
             throw writeException ;
@@ -99,8 +90,8 @@ public class DataAnimalPhotoService implements IDataAnimalPhoto {
     }
 
     @Override
-    public DataAnimalPhotoInputOutput delete(String id) {
-        DataAnimalPhotoInputOutput dataAnimalPhoto = getAllAnimalPhotoById(id);
+    public DataAnimalPhoto delete(String id) {
+        DataAnimalPhoto dataAnimalPhoto = getAllAnimalPhotoById(id);
         if(dataAnimalPhoto!=null){
             try{
                 dataAnimalPhotoRepository.deleteById(id);
@@ -114,8 +105,8 @@ public class DataAnimalPhotoService implements IDataAnimalPhoto {
     }
 
     @Override
-    public List<DataAnimalPhotoInputOutput> deleteByDataAnimal(String idAnimal) {
-        List<DataAnimalPhotoInputOutput> dataAnimalPhotos = getAllAnimalPhotoByIdAnimal(idAnimal);
+    public List<DataAnimalPhoto> deleteByDataAnimal(String idAnimal) {
+        List<DataAnimalPhoto> dataAnimalPhotos = getAllAnimalPhotoByIdAnimal(idAnimal);
         if(dataAnimalPhotos!=null){
             try{
                 dataAnimalPhotoRepository.deleteById(idAnimal);
@@ -128,9 +119,14 @@ public class DataAnimalPhotoService implements IDataAnimalPhoto {
         }
     }
 
-    private DataAnimalPhotoInputOutput uploadPhoto(DataAnimalPhotoInputOutput dataAnimalPhotoInputOutput, MultipartFile avatarFile) throws IOException {
-        dataAnimalPhotoInputOutput.setContent(avatarFile.getBytes());
-        return dataAnimalPhotoInputOutput;
+    private DataAnimalPhoto uploadPhoto(String id, String idAnimal, String description, MultipartFile avatarFile) throws IOException {
+        DataAnimalPhoto dataAnimalPhoto = new DataAnimalPhoto();
+        dataAnimalPhoto.setDataAnimal(dataAnimalRepository.getById(idAnimal));
+        dataAnimalPhoto.setId(id);
+        dataAnimalPhoto.setDescription(description);
+        dataAnimalPhoto.setContent(avatarFile.getBytes());
+        dataAnimalPhoto.setMediaType(avatarFile.getContentType());
+        return dataAnimalPhoto;
     }
 
 }

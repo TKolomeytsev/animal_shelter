@@ -7,6 +7,7 @@ import pro.sky.telegrambot.interfaces.INsiAnimalKind;
 import pro.sky.telegrambot.models.NsiAnimalKind;
 import pro.sky.telegrambot.repositories.INsiAnimalKindRepositiry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -78,5 +79,14 @@ public class NsiAnimalKindServices implements INsiAnimalKind {
         }else{
             throw new ExceptionNotFoundAnimalKind();
         }
+    }
+
+
+    public List<String> getCommands(List<NsiAnimalKind> eList) {
+        List<String> list = new ArrayList<>();
+        for(NsiAnimalKind item : eList){
+            list.add("/" + item.getName()+"\n");
+        }
+        return list;
     }
 }

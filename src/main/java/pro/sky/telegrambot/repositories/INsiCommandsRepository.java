@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface INsiCommandsRepository extends JpaRepository<NsiCommands,String> {
     List<NsiCommands> findByCommand(String command);
+    List<NsiCommands> findByLevel(int level);
 
     Optional<NsiCommands> findById(String id);
 

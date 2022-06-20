@@ -8,17 +8,18 @@ import java.io.IOException;
 import java.util.List;
 
 public interface IDataAnimalPhoto {
-    List<DataAnimalPhotoInputOutput> getAllAnimalPhoto();
+    List<DataAnimalPhoto> getAllAnimalPhoto();
 
-    List<DataAnimalPhotoInputOutput> getAllAnimalPhotoByIdAnimal(String idAnimal);
+    List<DataAnimalPhoto> getAllAnimalPhotoByIdAnimal(String idAnimal);
+    List<byte[]> getPhotoByIdAnimal(String idAnimal);
 
-    DataAnimalPhotoInputOutput getAllAnimalPhotoById(String id);
+    DataAnimalPhoto getAllAnimalPhotoById(String id);
 
-    DataAnimalPhotoInputOutput save(DataAnimalPhotoInputOutput dataAnimalPhotoInputOutput, MultipartFile avatarFile) throws IOException;
+    DataAnimalPhoto save(String idAnimal,String description, MultipartFile avatarFile) throws IOException;
 
-    DataAnimalPhotoInputOutput update(DataAnimalPhotoInputOutput dataAnimalPhotoInputOutput, MultipartFile avatarFile) throws IOException;
+    DataAnimalPhoto update(String id, String idAnimal, String description, MultipartFile avatarFile) throws IOException;
 
-    DataAnimalPhotoInputOutput delete(String id);
+    DataAnimalPhoto delete(String id);
 
-    List<DataAnimalPhotoInputOutput> deleteByDataAnimal(String idAnimal);
+    List<DataAnimalPhoto> deleteByDataAnimal(String idAnimal);
 }
