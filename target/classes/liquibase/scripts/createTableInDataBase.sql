@@ -40,3 +40,10 @@ CREATE TABLE data_animal(
     , growth numeric
     , color character varying(255)
 );
+
+CREATE TABLE standart_response(
+    id character varying(255) PRIMARY KEY
+    , relation_id character varying(255)
+    , response_name character varying(255)
+    , response_text character varying(255)
+);

@@ -6,11 +6,11 @@ import pro.sky.telegrambot.exception.ExceptionNotFoundDataAnimal;
 import pro.sky.telegrambot.exception.ExceptionServerError;
 import pro.sky.telegrambot.interfaces.IDataAnimal;
 import pro.sky.telegrambot.models.DataAnimal;
-import pro.sky.telegrambot.models.NsiCommands;
 import pro.sky.telegrambot.repositories.IDataAnimalRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DataAnimalServices implements IDataAnimal {
@@ -32,11 +32,11 @@ public class DataAnimalServices implements IDataAnimal {
 
     @Override
     public DataAnimal getAllDataAnimalById(String id) {
-        DataAnimal dataAnimal = dataAnimalRepository.findById(id).get();
-        if(dataAnimal!=null){
-            return dataAnimal;
+        Optional<DataAnimal> dataAnimal = dataAnimalRepository.findById(id);
+        if(dataAnimal.isPresent()){
+            return dataAnimal.get();
         }else {
-            throw new ExceptionNotFoundDataAnimal();
+            return null;
         }
     }
 

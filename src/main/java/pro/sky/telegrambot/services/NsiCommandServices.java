@@ -2,7 +2,6 @@ package pro.sky.telegrambot.services;
 
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.interfaces.INsiCommandServices;
-import pro.sky.telegrambot.models.NsiBreedAnimal;
 import pro.sky.telegrambot.models.NsiCommands;
 import pro.sky.telegrambot.repositories.INsiCommandsRepository;
 
@@ -61,7 +60,10 @@ public class NsiCommandServices implements INsiCommandServices {
     public List<String> getCommands(List<NsiCommands> eList) {
         List<String> list = new ArrayList<>();
         for(NsiCommands item : eList){
-            list.add("/" + item.getCommand());
+            list.add("----------------------" + "\n");
+            list.add("/" + item.getId() + "\n");
+            list.add(item.getCommand() + "\n");
+            list.add("----------------------" + "\n");
         }
         return list;
     }

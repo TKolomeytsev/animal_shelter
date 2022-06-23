@@ -20,7 +20,7 @@ public class DataAnimal {
     @Column(name = "id")
     private String idAnimal;
 
-    @OneToMany(mappedBy = "dataAnimal")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "dataAnimal")
     private Collection<DataAnimalPhoto> dataAnimalPhotos;
 
     @ManyToOne

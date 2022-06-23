@@ -7,7 +7,6 @@ import pro.sky.telegrambot.exception.ExceptionNotFoundAnimalPhoto;
 import pro.sky.telegrambot.exception.ExceptionServerError;
 import pro.sky.telegrambot.interfaces.IDataAnimalPhoto;
 import pro.sky.telegrambot.models.DataAnimalPhoto;
-import pro.sky.telegrambot.models.DataAnimalPhotoInputOutput;
 import pro.sky.telegrambot.repositories.IDataAnimalPhotoRepository;
 import pro.sky.telegrambot.repositories.IDataAnimalRepository;
 

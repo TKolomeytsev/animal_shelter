@@ -9,6 +9,7 @@ import pro.sky.telegrambot.repositories.INsiAnimalKindRepositiry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NsiAnimalKindServices implements INsiAnimalKind {
@@ -30,11 +31,11 @@ public class NsiAnimalKindServices implements INsiAnimalKind {
 
     @Override
     public NsiAnimalKind getAllAnimalKindById(String id) {
-        NsiAnimalKind nsiAnimalKind = nsiAnimalKindRepositiry.findById(id).get();
-        if(nsiAnimalKind!=null){
-            return nsiAnimalKind;
+        Optional<NsiAnimalKind> nsiAnimalKind = nsiAnimalKindRepositiry.findById(id);
+        if(nsiAnimalKind.isPresent()){
+            return nsiAnimalKind.get();
         }else {
-            throw new ExceptionNotFoundAnimalKind();
+            return null;
         }
     }
 
@@ -85,7 +86,9 @@ public class NsiAnimalKindServices implements INsiAnimalKind {
     public List<String> getCommands(List<NsiAnimalKind> eList) {
         List<String> list = new ArrayList<>();
         for(NsiAnimalKind item : eList){
-            list.add("/" + item.getName()+"\n");
+            list.add("/" + item.getId()+"\n");
+            list.add(item.getName()+"\n");
+            list.add("\n");
         }
         return list;
     }

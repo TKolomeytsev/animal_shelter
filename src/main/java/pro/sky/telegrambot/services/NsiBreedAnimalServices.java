@@ -4,12 +4,12 @@ import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.exception.ExceptionNotFoundBreedAnimal;
 import pro.sky.telegrambot.exception.ExceptionServerError;
 import pro.sky.telegrambot.interfaces.INsiBreedAnimal;
-import pro.sky.telegrambot.models.NsiAnimalKind;
 import pro.sky.telegrambot.models.NsiBreedAnimal;
 import pro.sky.telegrambot.repositories.INsiBreedAnimalRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NsiBreedAnimalServices implements INsiBreedAnimal {
@@ -32,11 +32,11 @@ public class NsiBreedAnimalServices implements INsiBreedAnimal {
 
     @Override
     public NsiBreedAnimal getAllBreedAnimalById(String id) {
-        NsiBreedAnimal nsiBreedAnimal = nsiBreedAnimalRepository.findById(id).get();
-        if(nsiBreedAnimal!=null){
-            return nsiBreedAnimal;
+        Optional<NsiBreedAnimal> nsiBreedAnimal = nsiBreedAnimalRepository.findById(id);
+        if(nsiBreedAnimal.isPresent()){
+            return nsiBreedAnimal.get();
         }else {
-            throw new ExceptionNotFoundBreedAnimal();
+            return null;
         }
     }
 
@@ -86,7 +86,9 @@ public class NsiBreedAnimalServices implements INsiBreedAnimal {
     public List<String> getCommands(List<NsiBreedAnimal> eList) {
         List<String> list = new ArrayList<>();
         for(NsiBreedAnimal item : eList){
-            list.add("/" + item.getName());
+            list.add("/" + item.getId()+"\n");
+            list.add(item.getName()+"\n");
+            list.add("\n");
         }
         return list;
     }

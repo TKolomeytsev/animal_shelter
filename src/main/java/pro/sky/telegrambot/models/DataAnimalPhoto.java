@@ -14,7 +14,7 @@ public class DataAnimalPhoto {
     private String idPhoto;
 
     //@Column(name = "id_animal")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "idAnimal")
     private DataAnimal dataAnimal;
 
