@@ -4,7 +4,10 @@ import pro.sky.telegrambot.models.DataMessage;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+/**
+ * @author AKolomeytsev<br/>
+ * Интерфейс <b>IDataMessagesServices</b> - декларирует методы работы с хранилищем сообщений.<br/>
+ */
 public interface IDataMessagesServices {
     List<DataMessage> getAllMessages();
 

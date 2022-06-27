@@ -7,6 +7,10 @@ import pro.sky.telegrambot.models.DataAnimal;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>IDataAnimalRepository</b> - репозиторий животных.<br/>
+ */
 public interface IDataAnimalRepository extends JpaRepository<DataAnimal,String> {
     Optional<DataAnimal> findById(String id);
     @Query(nativeQuery = true, value = "SELECT * FROM data_animal WHERE id_kind  = :idKind ORDER BY id DESC")

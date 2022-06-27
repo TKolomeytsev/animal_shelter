@@ -15,7 +15,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "nsi_animal_kind")
 public class NsiAnimalKind {
-
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")

@@ -11,6 +11,10 @@ import pro.sky.telegrambot.services.NsiBreedAnimalServices;
 
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>NsiBreedAnimalController</b> - контроллер пород животных.<br/>
+ */
 @RestController
 @RequestMapping("nsiBreedAnimal")
 public class NsiBreedAnimalController {

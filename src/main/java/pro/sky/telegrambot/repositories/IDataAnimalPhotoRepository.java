@@ -7,6 +7,10 @@ import pro.sky.telegrambot.models.DataAnimalPhoto;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>IDataAnimalPhotoRepository</b> - репозиторий изображений животных.<br/>
+ */
 public interface IDataAnimalPhotoRepository extends JpaRepository<DataAnimalPhoto,String> {
     Optional<DataAnimalPhoto> findById(String id);
 

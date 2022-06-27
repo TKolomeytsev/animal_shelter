@@ -6,13 +6,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pro.sky.telegrambot.models.DataAnimalPhoto;
-import pro.sky.telegrambot.models.NsiCommands;
 import pro.sky.telegrambot.models.StandartResponse;
 import pro.sky.telegrambot.services.StandartResponseService;
 
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>StandartResponseController</b> - контроллер ответов.<br/>
+ */
 @RestController
 @RequestMapping("standartResponse")
 public class StandartResponseController {

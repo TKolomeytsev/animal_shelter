@@ -7,8 +7,13 @@ import pro.sky.telegrambot.interfaces.IDataReport;
 import pro.sky.telegrambot.models.DataReport;
 import pro.sky.telegrambot.repositories.IDataReportRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>DataReportService</b> - сервис для работы с отчетами.<br/>
+ */
 @Service
 public class DataReportService implements IDataReport {
     private final IDataReportRepository dataReportRepository;
@@ -77,5 +82,14 @@ public class DataReportService implements IDataReport {
         }else{
             throw new ExceptionNotFoundAnimalKind();
         }
+    }
+
+    @Override
+    public DataReport getDataReportByChatIdAndDateSend(long chatId, LocalDateTime dateSend) {
+        DataReport report = dataReportRepository.getDataReportByChatIdAndDateSend(chatId,dateSend);
+        if(report!=null){
+                return report;
+        }
+        return null;
     }
 }

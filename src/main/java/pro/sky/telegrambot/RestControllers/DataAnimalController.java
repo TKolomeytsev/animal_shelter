@@ -7,11 +7,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.telegrambot.models.DataAnimal;
-import pro.sky.telegrambot.models.NsiAnimalKind;
 import pro.sky.telegrambot.services.DataAnimalServices;
 
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>DataAnimalController</b> - контроллер животных.<br/>
+ */
 @RestController
 @RequestMapping("DataAnimal")
 public class DataAnimalController {

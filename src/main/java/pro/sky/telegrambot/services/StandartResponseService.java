@@ -1,6 +1,7 @@
 package pro.sky.telegrambot.services;
 
 import org.springframework.stereotype.Service;
+import pro.sky.telegrambot.enams.ServiceEnams;
 import pro.sky.telegrambot.exception.ExceptionServerError;
 import pro.sky.telegrambot.interfaces.IStandartResponse;
 import pro.sky.telegrambot.models.StandartResponse;
@@ -8,10 +9,14 @@ import pro.sky.telegrambot.repositories.IStandartResponseRepositiry;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * @author AKolomeytsev<br/>
+ * <b>StandartResponseService</b> - сервис для работы с ответами.<br/>
+ */
 @Service
 public class StandartResponseService implements IStandartResponse {
     private final IStandartResponseRepositiry standartResponseRepositiry;
-    private  final String  ID = "id";
 
     public StandartResponseService(IStandartResponseRepositiry standartResponseRepositiry) {
         this.standartResponseRepositiry = standartResponseRepositiry;
@@ -85,7 +90,7 @@ public class StandartResponseService implements IStandartResponse {
     }
 
     private String returnCommand(StandartResponse item) {
-        if(item.getResponseText().substring(0,2).equals(ID)){
+        if(item.getResponseText().substring(0,2).equals(ServiceEnams.LINK.getValue())){
             return item.getResponseText().substring(5);
         }
         return item.getResId();

@@ -47,3 +47,20 @@ CREATE TABLE standart_response(
     , response_name character varying(255)
     , response_text character varying(255)
 );
+
+CREATE TABLE data_reports(
+     id character varying(255) PRIMARY KEY
+    , chatId bigint
+    , message character varying(255)
+    , media_type character varying(255)
+    , document oid
+    , date_send timestamp without time zone
+);
+
+CREATE TABLE data_animal_owner(
+    id character varying(255) PRIMARY KEY
+    , owner_name character varying(255)
+    , id_animal  character varying(255)
+    , chatId bigint
+    , date_guard timestamp without time zone
+);

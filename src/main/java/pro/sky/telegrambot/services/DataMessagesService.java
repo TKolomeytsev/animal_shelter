@@ -8,7 +8,10 @@ import pro.sky.telegrambot.repositories.IDataMessagesRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+/**
+ * @author AKolomeytsev<br/>
+ * <b>DataMessagesService</b> - сервис для работы с сообщениями.<br/>
+ */
 @Service
 public class DataMessagesService implements IDataMessagesServices {
     private final String SYMBOL_COMMAND = "/";

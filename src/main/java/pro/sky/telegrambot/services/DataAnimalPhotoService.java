@@ -12,13 +12,15 @@ import pro.sky.telegrambot.repositories.IDataAnimalRepository;
 
 import java.io.*;
 import java.util.List;
-import java.util.UUID;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>DataAnimalPhotoService</b> - сервис для работы с изображениями животных.<br/>
+ */
 @Service
 public class DataAnimalPhotoService implements IDataAnimalPhoto {
     private final IDataAnimalPhotoRepository dataAnimalPhotoRepository;
     private final IDataAnimalRepository dataAnimalRepository;
-
 
     public DataAnimalPhotoService(IDataAnimalPhotoRepository dataAnimalPhotoRepository, IDataAnimalRepository dataAnimalRepository) {
         this.dataAnimalPhotoRepository = dataAnimalPhotoRepository;
@@ -54,7 +56,6 @@ public class DataAnimalPhotoService implements IDataAnimalPhoto {
             throw new ExceptionNotFoundAnimalPhoto();
         }
     }
-
 
     @Override
     public DataAnimalPhoto getAllAnimalPhotoById(String id) {

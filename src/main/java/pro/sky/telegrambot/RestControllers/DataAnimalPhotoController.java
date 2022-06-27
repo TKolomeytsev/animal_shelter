@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>DataAnimalPhotoController</b> - контроллер изображений животных.<br/>
+ */
 @RestController
 @RequestMapping("animalPhoto")
 public class DataAnimalPhotoController {

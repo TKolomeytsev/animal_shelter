@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * @author AKolomeytsev<br/>
+ * Модель <b>DataReport</b> - описывает хранилище отчетов.<br/>
+ * Таблица <b>data_reports</b> базы данных <b>AnimalShelterDB</b>.
+ */
 @Entity
 @Table(name = "data_reports")
 public class DataReport {

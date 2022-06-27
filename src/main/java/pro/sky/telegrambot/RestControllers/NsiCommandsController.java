@@ -11,6 +11,10 @@ import pro.sky.telegrambot.services.NsiCommandServices;
 
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>NsiCommandsController</b> - контроллер команд.<br/>
+ */
 @RestController
 @RequestMapping("nsiCommands")
 public class NsiCommandsController {

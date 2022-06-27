@@ -8,7 +8,10 @@ import pro.sky.telegrambot.repositories.INsiCommandsRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author AKolomeytsev<br/>
+ * <b>NsiCommandServices</b> - сервис для работы с командами.<br/>
+ */
 @Service
 public class NsiCommandServices implements INsiCommandServices {
 

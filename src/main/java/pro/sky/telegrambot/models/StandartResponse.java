@@ -5,6 +5,11 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * @author AKolomeytsev<br/>
+ * Модель <b>StandartResponse</b> - описывает хранилище ответов.<br/>
+ * Таблица <b>standart_response</b> базы данных <b>AnimalShelterDB</b>.
+ */
 @Entity
 @Table(name = "standart_response")
 public class StandartResponse {

@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>DataAnimalServices</b> - сервис для работы с животными.<br/>
+ */
 @Service
 public class DataAnimalServices implements IDataAnimal {
     private final IDataAnimalRepository dataAnimalRepository;

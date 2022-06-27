@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author AKolomeytsev<br/>
+ * <b>NsiAnimalKindServices</b> - сервис для работы с видами животных.<br/>
+ */
 @Service
 public class NsiAnimalKindServices implements INsiAnimalKind {
     private final INsiAnimalKindRepositiry nsiAnimalKindRepositiry;

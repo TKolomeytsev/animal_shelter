@@ -49,19 +49,6 @@ public class DataAnimal {
     public DataAnimal() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DataAnimal that = (DataAnimal) o;
-        return age == that.age && weight == that.weight && Double.compare(that.growth, growth) == 0 && idAnimal.equals(that.idAnimal) && dataAnimalPhotos.equals(that.dataAnimalPhotos) && nsiAnimalKind.equals(that.nsiAnimalKind) && nsiBreedAnimal.equals(that.nsiBreedAnimal) && nickname.equals(that.nickname) && color.equals(that.color);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idAnimal, dataAnimalPhotos, nsiAnimalKind, nsiBreedAnimal, nickname, age, weight, growth, color);
-    }
-
     public String getId() {
         return idAnimal;
     }
@@ -147,5 +134,18 @@ public class DataAnimal {
                 ", growth=" + growth +
                 ", color='" + color + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DataAnimal that = (DataAnimal) o;
+        return age == that.age && weight == that.weight && Double.compare(that.growth, growth) == 0 && idAnimal.equals(that.idAnimal) && dataAnimalPhotos.equals(that.dataAnimalPhotos) && nsiAnimalKind.equals(that.nsiAnimalKind) && nsiBreedAnimal.equals(that.nsiBreedAnimal) && nickname.equals(that.nickname) && color.equals(that.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idAnimal, dataAnimalPhotos, nsiAnimalKind, nsiBreedAnimal, nickname, age, weight, growth, color);
     }
 }

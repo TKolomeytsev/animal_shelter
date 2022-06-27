@@ -5,6 +5,10 @@ import pro.sky.telegrambot.models.StandartResponse;
 
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * Интерфейс <b>IStandartResponse</b> - декларирует методы работы с хранилищем ответов.<br/>
+ */
 public interface IStandartResponse {
     List<StandartResponse> getAllStandartResponse();
 

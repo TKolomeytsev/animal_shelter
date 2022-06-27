@@ -4,6 +4,10 @@ import pro.sky.telegrambot.models.NsiBreedAnimal;
 
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * Интерфейс <b>INsiAnimalKind</b> - декларирует методы работы со справочником парод животных.<br/>
+ */
 public interface INsiBreedAnimal {
     List<NsiBreedAnimal> getAllBreedAnimal();
 

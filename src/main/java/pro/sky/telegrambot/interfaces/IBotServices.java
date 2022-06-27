@@ -20,7 +20,6 @@ public interface IBotServices {
      * @param update
      * @return метод ничего не возращает
      */
-    void router(Update update);
 
     void returnResponsToBot(Update update);
 }

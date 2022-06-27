@@ -1,9 +1,9 @@
 package pro.sky.telegrambot.models;
 
 import org.hibernate.annotations.GenericGenerator;
-import pro.sky.telegrambot.interfaces.Utils4AnimalShelter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * @author AKolomeytsev<br/>
@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "nsi_commands")
-public class NsiCommands implements Utils4AnimalShelter {
+public class NsiCommands {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
@@ -30,19 +30,7 @@ public class NsiCommands implements Utils4AnimalShelter {
     @Column(name = "description")
     private int description;
 
-
-
-
-
     public NsiCommands() {}
-
-    @Override
-    public String toString() {
-        return "NsiCommands{" +
-                "id:'" + id + '\'' +
-                ", command:'" + command + '\'' +
-                '}';
-    }
 
     public String getId() {
         return id;
@@ -60,11 +48,6 @@ public class NsiCommands implements Utils4AnimalShelter {
         this.command = command;
     }
 
-    @Override
-    public String responseAsString() {
-        return command + "\n";
-    }
-
     public int getLevel() {
         return level;
     }
@@ -79,5 +62,26 @@ public class NsiCommands implements Utils4AnimalShelter {
 
     public void setDescription(int description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "NsiCommands{" +
+                "id:'" + id + '\'' +
+                ", command:'" + command + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NsiCommands that = (NsiCommands) o;
+        return level == that.level && description == that.description && id.equals(that.id) && command.equals(that.command);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, command, level, description);
     }
 }

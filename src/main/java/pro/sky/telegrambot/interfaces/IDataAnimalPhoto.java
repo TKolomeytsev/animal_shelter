@@ -2,11 +2,14 @@ package pro.sky.telegrambot.interfaces;
 
 import org.springframework.web.multipart.MultipartFile;
 import pro.sky.telegrambot.models.DataAnimalPhoto;
-import pro.sky.telegrambot.models.DataAnimalPhotoInputOutput;
 
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * Интерфейс <b>IDataAnimalPhoto</b> - декларирует методы работы с хранилищем фотографий животных.<br/>
+ */
 public interface IDataAnimalPhoto {
     List<DataAnimalPhoto> getAllAnimalPhoto();
 

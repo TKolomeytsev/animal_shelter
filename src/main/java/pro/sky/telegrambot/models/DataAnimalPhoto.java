@@ -3,7 +3,11 @@ package pro.sky.telegrambot.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
+/**
+ * @author AKolomeytsev<br/>
+ * Модель <b>DataAnimalPhoto</b> - описывает хранилище избражений животного.<br/>
+ * Таблица <b>data_animal_photo</b> базы данных <b>AnimalShelterDB</b>.
+ */
 @Entity
 @Table(name = "data_animal_photo")
 public class DataAnimalPhoto {
@@ -13,7 +17,6 @@ public class DataAnimalPhoto {
     @Column(name = "id")
     private String idPhoto;
 
-    //@Column(name = "id_animal")
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "idAnimal")
     private DataAnimal dataAnimal;
@@ -23,6 +26,10 @@ public class DataAnimalPhoto {
 
     @Column(name = "media_type")
     private String mediaType;
+
+    @Lob
+    @Column(name = "content")
+    private byte[] content;
 
     public DataAnimalPhoto() {
     }
@@ -58,10 +65,6 @@ public class DataAnimalPhoto {
     public void setContent(byte[] content) {
         this.content = content;
     }
-
-    @Lob
-    @Column(name = "content")
-    private byte[] content;
 
     public String getMediaType() {
         return mediaType;

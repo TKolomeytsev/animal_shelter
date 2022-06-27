@@ -4,6 +4,10 @@ import pro.sky.telegrambot.models.DataAnimal;
 
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * Интерфейс <b>IDataAnimal</b> - декларирует методы работы с хранилищем животных.<br/>
+ */
 public interface IDataAnimal {
     List<DataAnimal> getAllAnimal();
 

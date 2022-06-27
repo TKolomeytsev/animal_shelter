@@ -3,6 +3,7 @@ package pro.sky.telegrambot.models;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * @author AKolomeytsev<br/>
@@ -72,4 +73,16 @@ public class DataMessage {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DataMessage that = (DataMessage) o;
+        return chatId == that.chatId && id.equals(that.id) && message.equals(that.message) && dateSend.equals(that.dateSend);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, chatId, message, dateSend);
+    }
 }

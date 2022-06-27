@@ -4,6 +4,10 @@ import pro.sky.telegrambot.models.NsiAnimalKind;
 
 import java.util.List;
 
+/**
+ * @author AKolomeytsev<br/>
+ * Интерфейс <b>INsiAnimalKind</b> - декларирует методы работы со справочником видов животных.<br/>
+ */
 public interface INsiAnimalKind {
     List<NsiAnimalKind> getAllAnimalKind();
 

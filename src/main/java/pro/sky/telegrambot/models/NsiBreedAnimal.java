@@ -23,10 +23,11 @@ public class NsiBreedAnimal {
     @OneToMany(mappedBy = "nsiBreedAnimal")
     private Collection<DataAnimal> dataAnimals;
 
-    public NsiBreedAnimal() {
-    }
     @Column(name = "name")
     private String name;
+
+    public NsiBreedAnimal() {
+    }
 
     public String getId() {
         return idBreed;
