@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: liquibase/scripts/createTableInDataBase.sql
+  - include:
+      file: liquibase/scripts/loadStartCommands.sql

@@ -8,6 +8,8 @@ import com.pengrad.telegrambot.request.SendDocument;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SendPhoto;
 import com.pengrad.telegrambot.response.GetFileResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.enams.ServiceEnams;
@@ -35,6 +37,8 @@ public class BotServices implements IBotServices {
     private final DataReportService reportService;
     private final DataAnimalOwnerServices animalOwnerServices;
     private final TelegramBot telegramBot;
+
+    private Logger logger = LoggerFactory.getLogger(BotServices.class);
 
     public BotServices(NsiCommandServices commandServices, DataMessagesService dataMessagesService, NsiAnimalKindServices animalKindServices, NsiBreedAnimalServices breedAnimalServices, DataAnimalPhotoService animalPhotoService, StandartResponseService responseService, DataAnimalServices animalServices, DataReportService reportService, DataAnimalOwnerServices animalOwnerServices, TelegramBot telegramBot) {
         this.commandServices = commandServices;
@@ -110,6 +114,10 @@ public class BotServices implements IBotServices {
      */
     @Override
     public void returnResponsToBot(Update update) {
+        logger.info("Пользователь:"+update.message().chat().firstName()+" "+update.message().chat().lastName()+" соединился с ботом. Время соединения - " + String.valueOf(getCurDate()));
+        if(dataMessagesService.getMessagesByChatId(update.message().chat().id()).size() == 0){
+            send(update.message().chat().id(), "Вас приветствует приют животных");
+        }
         DataMessage dataMessage = readMessage(update);
         if(!dataMessage.getMessage().isEmpty()) {
             DataMessage savedMessage = dataMessagesService.saveMessage(dataMessage);
@@ -143,6 +151,7 @@ public class BotServices implements IBotServices {
                     break;
             }
         }
+        logger.info("Пользователь:"+update.message().chat().firstName()+" "+update.message().chat().lastName()+" оконичил работу с ботом. " + String.valueOf(getCurDate()));
     }
 
     private List<String> subRouter(DataMessage message) {
@@ -275,12 +284,17 @@ public class BotServices implements IBotServices {
         LocalDateTime endDate = getCurDate();
         LocalDateTime startDate = getCurDate().minusDays(29);
         List<DataAnimalOwner> sendList = animalOwnerServices.getSendList(startDate,endDate);
-        if(sendList.size()>0) {
-            for(DataAnimalOwner item : sendList){
-                if(reportService.getDataReportByChatIdAndDateSend(item.getChatId(), endDate) == null){
-                    send(item.getChatId(),"Дорогой усыновитель, Вы не отправили отчет сегодня");
+        if(sendList != null) {
+            if (sendList.size() > 0) {
+                for (DataAnimalOwner item : sendList) {
+                    if (reportService.getDataReportByChatIdAndDateSend(item.getChatId(), endDate) == null) {
+                        logger.info("Сообщение усыновителю оправлено - " + String.valueOf(getCurDate()));
+                        send(item.getChatId(), "Дорогой усыновитель, Вы не отправили отчет сегодня");
+                    }
                 }
             }
+        }else {
+            logger.info("База усыновителей пуста. " + String.valueOf(getCurDate()));
         }
     }
 }

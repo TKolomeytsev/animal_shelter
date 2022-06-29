@@ -1,5 +1,7 @@
 package pro.sky.telegrambot.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import pro.sky.telegrambot.exception.ExceptionNotFoundAnimalKind;
@@ -21,6 +23,7 @@ import java.util.List;
 public class DataAnimalPhotoService implements IDataAnimalPhoto {
     private final IDataAnimalPhotoRepository dataAnimalPhotoRepository;
     private final IDataAnimalRepository dataAnimalRepository;
+    private Logger logger = LoggerFactory.getLogger(DataAnimalPhotoService.class);
 
     public DataAnimalPhotoService(IDataAnimalPhotoRepository dataAnimalPhotoRepository, IDataAnimalRepository dataAnimalRepository) {
         this.dataAnimalPhotoRepository = dataAnimalPhotoRepository;
@@ -49,10 +52,13 @@ public class DataAnimalPhotoService implements IDataAnimalPhoto {
 
     @Override
     public List<byte[]> getPhotoByIdAnimal(String idAnimal) {
+        logger.info("Пользователь запросил фото животного");
         List<byte[]> photos = dataAnimalPhotoRepository.getPhotoByIdAnimal(idAnimal);
         if(photos.size()>0){
+            logger.info("Пользователь получил фото животного");
             return photos;
         }else {
+            logger.info("Фото животного отсутствует");
             throw new ExceptionNotFoundAnimalPhoto();
         }
     }
@@ -69,11 +75,14 @@ public class DataAnimalPhotoService implements IDataAnimalPhoto {
 
     @Override
     public DataAnimalPhoto save(String idAnimal,String description, MultipartFile avatarFile) throws IOException {
+        logger.info("Администратор сохраняет фото животного");
         try{
             DataAnimalPhoto dataAnimalPhoto = uploadPhoto(null,idAnimal,description,avatarFile);
             dataAnimalPhoto = dataAnimalPhotoRepository.save(dataAnimalPhoto);
+            logger.info("Фото животного сохранено");
             return dataAnimalPhoto;
         }catch (ExceptionServerError | IOException writeException){
+            logger.info("При сохранении фото произошла ошибка");
             throw writeException ;
         }
     }

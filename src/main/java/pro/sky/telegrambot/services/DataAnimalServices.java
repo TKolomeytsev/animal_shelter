@@ -1,5 +1,7 @@
 package pro.sky.telegrambot.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.exception.ExceptionNotFoundAnimalKind;
 import pro.sky.telegrambot.exception.ExceptionNotFoundDataAnimal;
@@ -19,6 +21,7 @@ import java.util.Optional;
 @Service
 public class DataAnimalServices implements IDataAnimal {
     private final IDataAnimalRepository dataAnimalRepository;
+    private Logger logger = LoggerFactory.getLogger(DataAnimalServices.class);
 
     public DataAnimalServices(IDataAnimalRepository dataAnimalRepository) {
         this.dataAnimalRepository = dataAnimalRepository;
@@ -26,20 +29,26 @@ public class DataAnimalServices implements IDataAnimal {
 
     @Override
     public List<DataAnimal> getAllAnimal() {
+        logger.info("Пользователь запросил список животных...");
         List<DataAnimal> dataAnimals = dataAnimalRepository.findAll();
         if(dataAnimals!=null){
+            logger.info("Список животных получен...");
             return dataAnimals;
         }else {
+            logger.info("При получении списка животных произошла ошибка...");
             throw new ExceptionNotFoundDataAnimal();
         }
     }
 
     @Override
     public DataAnimal getAllDataAnimalById(String id) {
+        logger.info("Пользователь запросил животного с id - " + id);
         Optional<DataAnimal> dataAnimal = dataAnimalRepository.findById(id);
         if(dataAnimal.isPresent()){
+            logger.info("Животного с id - " + id + " найдено");
             return dataAnimal.get();
         }else {
+            logger.info("Животного с id - " + id + " не найдено");
             return null;
         }
     }

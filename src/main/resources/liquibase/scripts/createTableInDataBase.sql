@@ -11,6 +11,8 @@ CREATE TABLE data_messages
 CREATE TABLE nsi_commands(
     id character varying(255) PRIMARY KEY
     , command character varying(255)
+    , level integer
+    , description integer
 );
 
 CREATE TABLE nsi_animal_kind(
@@ -50,7 +52,7 @@ CREATE TABLE standart_response(
 
 CREATE TABLE data_reports(
      id character varying(255) PRIMARY KEY
-    , chatId bigint
+    , chat_Id bigint
     , message character varying(255)
     , media_type character varying(255)
     , document oid
@@ -61,6 +63,6 @@ CREATE TABLE data_animal_owner(
     id character varying(255) PRIMARY KEY
     , owner_name character varying(255)
     , id_animal  character varying(255)
-    , chatId bigint
+    , chat_Id bigint
     , date_guard timestamp without time zone
 );
