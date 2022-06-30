@@ -1,5 +1,7 @@
 package pro.sky.telegrambot.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.exception.ExceptionNotFoundBreedAnimal;
 import pro.sky.telegrambot.exception.ExceptionServerError;
@@ -17,6 +19,9 @@ import java.util.Optional;
  */
 @Service
 public class NsiBreedAnimalServices implements INsiBreedAnimal {
+
+    Logger logger = LoggerFactory.getLogger(NsiBreedAnimalServices.class);
+
     private final INsiBreedAnimalRepository nsiBreedAnimalRepository;
 
     public NsiBreedAnimalServices(INsiBreedAnimalRepository nsiBreedAnimalRepository) {
@@ -28,8 +33,10 @@ public class NsiBreedAnimalServices implements INsiBreedAnimal {
     public List<NsiBreedAnimal> getAllBreedAnimal() {
         List<NsiBreedAnimal> nsiBreedAnimals = nsiBreedAnimalRepository.findAll();
         if(nsiBreedAnimals!=null){
+            logger.info("Get all animals breed");
             return nsiBreedAnimals;
         }else {
+            logger.warn("Don`t find animals breed");
             throw new ExceptionNotFoundBreedAnimal();
         }
     }
@@ -38,8 +45,10 @@ public class NsiBreedAnimalServices implements INsiBreedAnimal {
     public NsiBreedAnimal getAllBreedAnimalById(String id) {
         Optional<NsiBreedAnimal> nsiBreedAnimal = nsiBreedAnimalRepository.findById(id);
         if(nsiBreedAnimal.isPresent()){
+            logger.info("Get animal breed by id");
             return nsiBreedAnimal.get();
         }else {
+            logger.warn("Don`t find animal breed by id");
             return null;
         }
     }
@@ -48,8 +57,10 @@ public class NsiBreedAnimalServices implements INsiBreedAnimal {
     public List<NsiBreedAnimal> getAllBreedAnimalByName(String name) {
         List<NsiBreedAnimal> nsiBreedAnimal = nsiBreedAnimalRepository.findByName(name);
         if(nsiBreedAnimal!=null){
+            logger.info("Get all breed animal by name");
             return nsiBreedAnimal;
         }else {
+            logger.warn("Don`t find animal breed by name");
             throw new ExceptionNotFoundBreedAnimal();
         }
     }
@@ -57,8 +68,10 @@ public class NsiBreedAnimalServices implements INsiBreedAnimal {
     @Override
     public NsiBreedAnimal save(NsiBreedAnimal breed) {
         try{
+            logger.info("Save new animal breed");
             return nsiBreedAnimalRepository.save(breed);
         }catch (ExceptionServerError exceptionServerError){
+            logger.error("Server save new animal breed error");
             throw exceptionServerError;
         }
     }
@@ -66,8 +79,10 @@ public class NsiBreedAnimalServices implements INsiBreedAnimal {
     @Override
     public NsiBreedAnimal update(NsiBreedAnimal breed) {
         try{
+            logger.info("Update animal breed");
             return nsiBreedAnimalRepository.save(breed);
         }catch (ExceptionServerError exceptionServerError){
+            logger.error("Server update animal breed error");
             throw exceptionServerError;
         }
     }
@@ -77,17 +92,21 @@ public class NsiBreedAnimalServices implements INsiBreedAnimal {
         NsiBreedAnimal nsiBreedAnimal = getAllBreedAnimalById(id);
         if(nsiBreedAnimal!=null){
             try{
+                logger.info("Delete animal breed by id");
                 nsiBreedAnimalRepository.deleteById(id);
                 return nsiBreedAnimal;
             }catch (ExceptionServerError exceptionServerError){
+                logger.error("Server delete animal breed by id error");
                 throw exceptionServerError;
             }
         }else{
+            logger.warn("Don` find animal breed to delete");
             throw new ExceptionNotFoundBreedAnimal();
         }
     }
 
     public List<String> getCommands(List<NsiBreedAnimal> eList) {
+        logger.info("Get all animal breed name and id");
         List<String> list = new ArrayList<>();
         for(NsiBreedAnimal item : eList){
             list.add("/" + item.getId()+"\n");
