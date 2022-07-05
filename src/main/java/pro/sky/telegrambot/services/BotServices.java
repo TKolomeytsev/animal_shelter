@@ -110,6 +110,9 @@ public class BotServices implements IBotServices {
      */
     @Override
     public void returnResponsToBot(Update update) {
+        if(dataMessagesService.getMessagesByChatId(update.message().chat().id()).size() == 0){
+            send(update.message().chat().id(), "Вас приветствует приют животных");
+        }
         DataMessage dataMessage = readMessage(update);
         if(!dataMessage.getMessage().isEmpty()) {
             DataMessage savedMessage = dataMessagesService.saveMessage(dataMessage);
